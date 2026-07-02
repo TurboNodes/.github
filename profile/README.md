@@ -13,6 +13,14 @@ End-to-end encrypted HTTPS/SOCKS5 proxy network.
 
 ## System
 ```mermaid
+%%{init: {
+  "flowchart": {
+    "rankSpacing": 20
+  },
+  "themeVariables": {
+    "fontSize": "12px"
+  }
+}}%%
 flowchart TD
     User(Customer)
     ClientNode(Zero-Trust Client Node)
@@ -22,6 +30,7 @@ flowchart TD
         AI[Traffic Analysis] 
     end
     TargetWebsite[Target Website]
+    S3@{ shape: datastore, label: "Amazon S3" }
 
     User --> |Sends HTTP/S or SOCKS5 Requests| ProxyServer
     
@@ -29,6 +38,7 @@ flowchart TD
     ProxyServer --> |Uses for Auth & Credits| Redis
     
     AI --> |Evaluates server connections| Redis
+    AI --> |Stores metrics| S3
 
     ClientNode --> |Processes Requests To| TargetWebsite
     
