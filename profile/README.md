@@ -6,7 +6,7 @@ This open-source infrastructure is designed for self-hosted, easy deployment via
 It is free for commercial use.
 
 
-## Products
+## Product
 
 End-to-end encrypted HTTPS/SOCKS5 proxy network.
 
