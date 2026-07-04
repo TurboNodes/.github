@@ -11,6 +11,9 @@ End-to-end encrypted HTTPS/SOCKS5 proxy network.
 
 
 ## System
+<details>
+  <summary>See global architecture</summary>
+    
 ```mermaid
 flowchart LR
     User(Customer)
@@ -31,5 +34,6 @@ flowchart LR
 
     ClientNode --> |Processes Requests To| TargetWebsite
 ```
+</details>
 
 
