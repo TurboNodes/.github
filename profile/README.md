@@ -15,30 +15,27 @@ End-to-end encrypted HTTPS/SOCKS5 proxy network.
 ```mermaid
 %%{init: {
   "flowchart": {
-    "rankSpacing": 20
   },
   "themeVariables": {
-    "fontSize": "12px"
   }
 }}%%
-flowchart TD
+flowchart LR
     User(Customer)
     ClientNode(Zero-Trust Client Node)
-    subgraph Self-hosted [Self-hosted backend]
+    subgraph Self-hosted [Self-hosted Docker backend]
         ProxyServer[Proxy Server]
-        Redis[(Redis Database & Streams)]
-        AI[Traffic Analysis] 
+        Redis[(Redis K/V store)]
+        ClickHouse[(ClickHouse)]
     end
     TargetWebsite[Target Website]
-    S3@{ shape: datastore, label: "Amazon S3" }
+    
 
     User --> |Sends HTTP/S or SOCKS5 Requests| ProxyServer
     
     ProxyServer <--> |TLS-encrypted QUIC Messaging| ClientNode
     ProxyServer --> |Uses for Auth & Credits| Redis
     
-    AI --> |Evaluates server connections| Redis
-    AI --> |Stores metrics| S3
+    ProxyServer --> |Stores metrics| ClickHouse
 
     ClientNode --> |Processes Requests To| TargetWebsite
     
